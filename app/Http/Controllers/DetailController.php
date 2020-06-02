@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\detail;
+use App\Detail;
 
 class DetailController extends Controller
 {
     public function index()
     {
-       $users = detail::all();
+       $users = Detail::all();
        return view ('details/index',['users'=>$users]);
     }
     public function create()
@@ -29,7 +29,7 @@ class DetailController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        detail::where('id',$users->id)
+        Detail::where('id',$users->id)
             ->update([
                 'name'=>$request->name,
                 'email'=>$request->email,
@@ -40,7 +40,7 @@ class DetailController extends Controller
 
     public function destroy(Detail $users)
     {
-        detail::destroy($users->id); 
+        Detail::destroy($users->id); 
         return redirect('/Details')->with('status','Deleting Succes');
        
     }
@@ -60,7 +60,7 @@ class DetailController extends Controller
         return redirect('/Details')->with('status','Input Succes');
     }
     public function json(){
-        $users = detail::all();
+        $users = Detail::all();
         return $users;
     }
 }
